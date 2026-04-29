@@ -1,1 +1,49 @@
+//Insert a single student document using insertOne()
+db.students.insertOne({
+  student_id: 101,
+  name: "Rahul Sharma",
+  department: "Computer Science",
+  year_of_admission: 2024,
+  contact_number: "9876543210",
+  city: "Bangalore"
+});
 
+//Insert multiple student records using insertMany()
+db.students.insertMany([
+  {
+    student_id: 102,
+    name: "Anjali Verma",
+    department: "Electronics",
+    year_of_admission: 2024,
+    contact_number: "9123456780",
+    city: "Delhi"
+  },
+  {
+    student_id: 103,
+    name: "Kiran Kumar",
+    department: "Computer Science",
+    year_of_admission: 2023,
+    contact_number: "9988776655",
+    city: "Hyderabad"
+  },
+  {
+    student_id: 104,
+    name: "Sneha Reddy",
+    department: "Mechanical",
+    year_of_admission: 2024,
+    contact_number: "9090909090",
+    city: "Chennai"
+  }
+]);
+
+//Retrieve all students from the “Computer Science” department using find()
+db.students.find({ department: "Computer Science" });
+
+//Update contact number of student with student_id = 101 using updateOne()
+db.students.updateOne(
+  { student_id: 101 },
+  { $set: { contact_number: "9999999999" } }
+);
+
+//Delete a student record with student_id = 105 using deleteOne()
+db.students.deleteOne({ student_id: 105 });
