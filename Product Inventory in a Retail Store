@@ -1,0 +1,27 @@
+//Insert a new product using insertOne()
+db.products.insertOne({
+  product_id: 501,
+  product_name: "Wireless Mouse",
+  category: "Electronics",
+  price: 799,
+  quantity_in_stock: 50,
+  supplier_name: "Tech Supplies Ltd"
+});
+
+//Retrieve all products with only product name and price (projection)
+db.products.find(
+  {},
+  { _id: 0, product_name: 1, price: 1 }
+);
+
+//Display all products sorted by price in ascending order
+db.products.find().sort({ price: 1 });
+
+//Update the quantity of product with product_id = 501
+db.products.updateOne(
+  { product_id: 501 },
+  { $set: { quantity_in_stock: 100 } }
+);
+
+//Delete all products in the “Expired” category using deleteMany()
+db.products.deleteMany({ category: "Expired" });
