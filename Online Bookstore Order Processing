@@ -1,0 +1,25 @@
+//Insert a new order using insertOne()
+db.orders.insertOne({
+  order_id: 2001,
+  customer_name: "Amit Verma",
+  book_title: "MongoDB Basics",
+  quantity: 2,
+  order_amount: 450,
+  order_date: "2026-04-25",
+  delivery_status: "Processing"
+});
+
+//Retrieve all orders where order amount is less than 500 using $lt
+db.orders.find({ order_amount: { $lt: 500 } });
+
+//Display all orders sorted by order amount in descending order
+db.orders.find().sort({ order_amount: -1 });
+
+//Update delivery status to “Shipped” for order_id = 2001
+db.orders.updateOne(
+  { order_id: 2001 },
+  { $set: { delivery_status: "Shipped" } }
+);
+
+//Delete all orders where delivery status is “Canceled”
+db.orders.deleteMany({ delivery_status: "Canceled" });
