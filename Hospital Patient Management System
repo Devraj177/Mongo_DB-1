@@ -1,0 +1,51 @@
+//Insert multiple patient records using insertMany()
+db.patients.insertMany([
+  {
+    patient_id: 201,
+    patient_name: "Ravi Kumar",
+    age: 65,
+    gender: "Male",
+    diagnosis: "Diabetes",
+    doctor_assigned: "Dr. Kumar",
+    admission_date: "2026-03-10",
+    discharge_status: "Admitted"
+  },
+  {
+    patient_id: 202,
+    patient_name: "Meena Sharma",
+    age: 58,
+    gender: "Female",
+    diagnosis: "Hypertension",
+    doctor_assigned: "Dr. Singh",
+    admission_date: "2026-03-15",
+    discharge_status: "Admitted"
+  },
+  {
+    patient_id: 203,
+    patient_name: "Suresh Reddy",
+    age: 72,
+    gender: "Male",
+    diagnosis: "Cardiac Arrest",
+    doctor_assigned: "Dr. Kumar",
+    admission_date: "2026-03-18",
+    discharge_status: "Admitted"
+  }
+]);
+
+//Retrieve all patients whose age is greater than 60 using $gt
+db.patients.find({ age: { $gt: 60 } });
+
+//Display only patient name and diagnosis using projection
+db.patients.find(
+  {},
+  { _id: 0, patient_name: 1, diagnosis: 1 }
+);
+
+//Update discharge status to “Discharged” for patients treated by "Dr. Kumar"
+db.patients.updateMany(
+  { doctor_assigned: "Dr. Kumar" },
+  { $set: { discharge_status: "Discharged" } }
+);
+
+//Delete all records where discharge status is “Archived”
+db.patients.deleteMany({ discharge_status: "Archived" });
