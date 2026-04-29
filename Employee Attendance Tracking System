@@ -1,0 +1,48 @@
+//Insert multiple attendance records using insertMany()
+db.attendance.insertMany([
+  {
+    employee_id: 301,
+    employee_name: "Neha Gupta",
+    department: "HR",
+    date: "2026-04-20",
+    check_in_time: "09:10",
+    check_out_time: "17:30",
+    attendance_status: "Present"
+  },
+  {
+    employee_id: 302,
+    employee_name: "Arjun Mehta",
+    department: "Finance",
+    date: "2026-04-20",
+    check_in_time: "09:45",
+    check_out_time: "17:15",
+    attendance_status: "Late"
+  },
+  {
+    employee_id: 303,
+    employee_name: "Priya Nair",
+    department: "HR",
+    date: "2026-04-20",
+    check_in_time: "00:00",
+    check_out_time: "17:00",
+    attendance_status: "Absent"
+  }
+]);
+
+//Retrieve all records where department = “HR” using $eq
+db.attendance.find({ department: { $eq: "HR" } });
+
+//Display employee name and attendance status using projection
+db.attendance.find(
+  {},
+  { _id: 0, employee_name: 1, attendance_status: 1 }
+);
+
+//Update attendance status to “Present” for incorrect check-in records
+db.attendance.updateMany(
+  { check_in_time: "00:00" },
+  { $set: { attendance_status: "Present" } }
+);
+
+//Delete records where attendance status is “Duplicate”
+db.attendance.deleteMany({ attendance_status: "Duplicate" });
